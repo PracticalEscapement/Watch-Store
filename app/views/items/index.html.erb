@@ -1,12 +1,8 @@
 <h1>List of all items</h1>
 
 	<div>
-		<% @item.each do |i| %>
-			-<%= link_to(i.description, {:controller => 'items', :action => 'show'}) %><br />
+		<% @items.each do |item| %>
+			-<%= link_to(item.description, item_path(item)) %><br />
 		<% end %>
 	</div>
-	<div>
-		<footer>
-			---<%= link_to("Sell An Item", {:controller => 'items', :action => 'new'}) %>
-		</footer>
-	</div>
+	
