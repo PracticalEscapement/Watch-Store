@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get "/store", to: "items#index", as: :store
   get 'items/show/:id', to: 'items#show', as: :item
+  
+  get "add_item", to: "items#new"
+  post "add_item", to: "items#create"
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end 
