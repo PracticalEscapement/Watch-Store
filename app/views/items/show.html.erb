@@ -1,0 +1,9 @@
+<h1>Page for specific item</h1>
+
+<%= @item.description %><br />
+<%= @item.condition %><br />
+<%= @item.price %><br />
+
+<% if @item.image_url.present? %>
+	<%= image_tag(@item.image_url, alt: @item.description, width: 300) %>
+<% end %>

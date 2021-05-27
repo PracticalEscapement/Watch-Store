@@ -1,0 +1,8 @@
+<h1>List of all items</h1>
+
+	<div>
+		<% @items.each do |item| %>
+			-<%= link_to(item.description, item_path(item)) %><br />
+		<% end %>
+	</div>
+	
