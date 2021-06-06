@@ -1,9 +1,20 @@
-<h1>Page for specific item</h1>
+<h1><%= @item.description %></h1>
 
-<%= @item.description %><br />
-<%= @item.condition %><br />
-<%= @item.price %><br />
-
-<% if @item.image_url.present? %>
-	<%= image_tag(@item.image_url, alt: @item.description, width: 300) %>
-<% end %>
+<div>
+	<% if @item.image_url.present? %>
+		<%= image_tag(@item.image_url, alt: @item.description, width: 300) %>
+	<% end %>
+</div>
+<div>
+	<%= "Description: #{@item.description}" %><br />
+	<%= "Condition: #{@item.condition.upcase}" %><br />
+	<%= "Price: #{@item.price}" %><br />
+</div>
+<div>
+	<%= form_with model: @order, url: orders_create_path do |form| %>
+		<%= form.hidden_field :item_id, :value => @item.id %>
+		<div class="mb-3">
+			<%= form.submit "Purchase", class: "btn btn-primary" %>
+		</div>
+	<% end %>
+</div>

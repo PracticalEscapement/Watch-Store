@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  
   root 'pages#home'
+  devise_for :users
 
+  post 'orders/create'
+  
   get "/store", to: "items#index", as: :store
   get 'items/show/:id', to: 'items#show', as: :item
   
