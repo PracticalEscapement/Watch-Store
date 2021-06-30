@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_191842) do
+ActiveRecord::Schema.define(version: 2021_06_29_235138) do
 
   create_table "items", force: :cascade do |t|
     t.string "catagory"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_191842) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "stripe_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

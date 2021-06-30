@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders
+
+  def name
+    [first_name, last_name].join(' ')
+  end
 end
