@@ -4,6 +4,8 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.create(order_params)
+    ProcessOrderService.new(order: @order).call
+    redirect_to(order_confirmation_path)
   end
 
 private
