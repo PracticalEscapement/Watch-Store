@@ -1,7 +1,9 @@
 
 
-<h1>This is a Home Page<h1>
+<% if current_user.present? %>
+	<%= current_user.name.titleize %>
+<% end %>
 
 	<h2>Pages#home</h2>
-		<%= link_to("Items For Sale", {:controller => 'items', :action => 'index'}) %>
+		<%= link_to("Items For Sale", store_path) %>
 	
