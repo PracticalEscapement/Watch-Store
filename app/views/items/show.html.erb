@@ -14,7 +14,14 @@
 	<%= form_with model: @order, url: orders_create_path do |form| %>
 		<%= form.hidden_field :item_id, :value => @item.id %>
 		<div class="mb-3">
-			<%= form.submit "Purchase", class: "btn btn-primary" %>
+			<%= form.submit "Buy Now", class: "btn btn-primary" %>
+		</div>
+	<% end %>
+	
+	<%= form_with model: @line_item, url: add_to_cart_path do |form| %>
+		<%= form.hidden_field :item_id, :value => @item.id %>
+		<div class="mb-3">
+			<%= form.submit "Add To Cart", class: "btn btn-primary" %>
 		</div>
 	<% end %>
 </div>

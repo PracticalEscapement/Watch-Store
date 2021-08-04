@@ -2,7 +2,7 @@
 
 	<div>
 		<% @items.each do |item| %>
-			-<%= link_to(item.description, item_path(item)) %><br />
+			-<%= link_to(item.description.titleize, item_path(item)) %><br />
 		<% end %>
 	</div>
 	<div>
