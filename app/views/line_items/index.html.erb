@@ -1,6 +1,32 @@
-<h1>LineItems#index</h1>
-<p>Find me in app/views/line_items/index.html.erb</p>
+<h3>LineItems#index</h1>
+<h1><%= "#{current_user.name}'s Cart" %></h1>
 
-<% @line_items.each do |line_item| %>
-    <%= line_item.description %></br>
+<div>
+  <% @line_items.each do |line_item| %>
+    <%= "#{line_item.item.description}: #{line_item.quantity}" %>
+    <%= form_with model: line_item, method: :put, url: update_line_item_quantity_path, class: "quantity_form"  do |f| %>
+      <%= f.select :quantity, ((1..10).map {|i| [i,i] }), {}, {selected: line_item.quantity, class: "quantity_dropdown"} %>
+      <%= f.hidden_field :line_item_id, value: line_item.id %></br>
+    <% end %>
+  <% end %>
+</div>
+<div>
+<%= form_with model: nil, url: clear_cart_path do |form| %>
+  <div class="mb-3">
+    <%= form.submit "Clear Cart", class: "btn btn-primary" %>
+  </div>
 <% end %>
+</div>
+
+<script>
+  $(function() {
+  $(".quantity_dropdown").change(function() {
+    $(this).closest(".quantity_form").submit()
+  });
+  })
+</script>
+
+<form action="/create-checkout-session" method="POST">
+        <button type="submit">Checkout</button>
+      </form>
+

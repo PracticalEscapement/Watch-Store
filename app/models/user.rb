@@ -8,7 +8,8 @@ class User < ApplicationRecord
   has_one :cart
 
   def name
-    [first_name, last_name].join(' ')
+    full_name = [first_name, last_name].join(' ')
+    full_name.titleize
   end
 
   def shopping_cart
