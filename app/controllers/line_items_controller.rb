@@ -3,8 +3,7 @@ class LineItemsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    shopping_cart = current_user.shopping_cart.items
-    @line_items = shopping_cart    
+    @line_items = current_user.cart.line_items
   end
 
   def create
@@ -21,10 +20,26 @@ class LineItemsController < ApplicationController
     end
   end
 
+  def update
+    line_item = current_user.cart.line_items.find(params[:line_item][:line_item_id])
+    line_item.update!(quantity: params[:line_item][:quantity])
+    redirect_to(my_cart_path, notice: "Quantity Changed")
+  end
+
+  def destroy
+    @line_items =  current_user.shopping_cart.items
+    @line_items.destroy_all
+    redirect_to(my_cart_path, notice: "Cart Has Been Cleared")
+  end
+
   private
 
   def line_item_params
     params.require(:line_item).permit(:item_id).merge(cart_id: current_user.shopping_cart.id)
+  end
+
+  def line_item_quantity
+    
   end
 
 end

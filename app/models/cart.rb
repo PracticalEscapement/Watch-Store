@@ -8,12 +8,14 @@ class Cart < ApplicationRecord
   end
 
   def total_quantity
-    total_count = 0
-    line_items.each do |line_item|
-      total_count += line_item.quantity
-    end
-    total_count
+    line_items.sum {|line_item| line_item.quantity}
   end
 
+  def total_cost
+    line_items.sum {|line_item| line_item.item.price * line_item.quantity}
+  end
+
+
 end
+
 

@@ -14,7 +14,7 @@
 	<%= form_with model: @order, url: orders_create_path do |form| %>
 		<%= form.hidden_field :item_id, :value => @item.id %>
 		<div class="mb-3">
-			<%= form.submit "Buy Now", class: "btn btn-primary" %>
+			<%= form.button "Buy Now", class: "btn btn-primary", data: { disable_with: "Please wait..." } %>
 		</div>
 	<% end %>
 	

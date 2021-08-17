@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   
   
-  get 'line_items/create'
-  get 'line_items/delete'
-  
   root 'pages#home'
   devise_for :users
 
@@ -17,6 +14,9 @@ Rails.application.routes.draw do
 
   post "add_to_cart", to: "line_items#create", as: :add_to_cart
   get 'my_cart', to: "line_items#index", as: :my_cart
+  post 'clear_cart', to: "line_items#destroy", as: :clear_cart
+  put 'update_line_item_quantity', to:  "line_items#update", as: :update_line_item_quantity
+  
 
   get '/order_confirmation', to: 'pages#order_confirmation', as: :order_confirmation
 
