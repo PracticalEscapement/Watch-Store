@@ -1,6 +1,6 @@
 class Cart < ApplicationRecord
   belongs_to :user
-  has_many :line_items
+  has_many :line_items, as: :owner
   has_many :items, through: :line_items
 
   def clear
@@ -12,6 +12,10 @@ class Cart < ApplicationRecord
   end
 
   def total_cost
+    total_cost_in_cents / 100
+  end
+
+  def total_cost_in_cents
     line_items.sum {|line_item| line_item.item.price * line_item.quantity}
   end
 
