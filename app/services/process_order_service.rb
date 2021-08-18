@@ -16,12 +16,20 @@ class ProcessOrderService
     @order.user
   end
 
-  def item
-    @order.item
+  def cart
+    user.shopping_cart
   end
 
   def default_currency
     'usd'
+  end
+
+  def order_contents
+    line_item_descriptions = []
+    cart.line_items.each do |line_item|
+      line_item_descriptions << line_item.item.description + " x " + line_item.quantity.to_s
+    end
+    line_item_descriptions.join(", ")
   end
 
   def create_stripe_customer
@@ -76,9 +84,9 @@ class ProcessOrderService
   def charge_customer
     Stripe::Charge.create({
       customer: stripe_customer.id,
-      amount: item.price,
+      amount: cart.total_cost_in_cents,
       currency: default_currency,
-      description: item.description,
+      description: order_contents,
     })
   end
 
