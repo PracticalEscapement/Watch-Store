@@ -7,8 +7,12 @@ class Cart < ApplicationRecord
     line_items.destroy_all
   end
 
+  def empty?
+    line_items.empty?
+  end
+
   def total_quantity
-    line_items.sum {|line_item| line_item.quantity}
+    line_items.sum(&:quantity)
   end
 
   def total_cost
@@ -16,10 +20,7 @@ class Cart < ApplicationRecord
   end
 
   def total_cost_in_cents
-    line_items.sum {|line_item| line_item.item.price * line_item.quantity}
+    line_items.sum { |line_item| line_item.item.price * line_item.quantity }
   end
 
-
 end
-
-
