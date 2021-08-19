@@ -38,8 +38,4 @@ class LineItemsController < ApplicationController
     params.require(:line_item).permit(:item_id).merge(owner: current_user.shopping_cart)
   end
 
-  def line_item_quantity
-    
-  end
-
 end

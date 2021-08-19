@@ -1,17 +1,18 @@
 <h3>LineItems#index</h1>
 <h1><%= "#{current_user.name}'s Cart" %></h1>
 
-<% if current_user.shopping_cart.line_items.count > 0 %>
-  <div>
-    <% @line_items.each do |line_item| %>
-      <%= "#{line_item.item.description}: #{line_item.quantity}" %>
-      <%= form_with model: line_item, method: :put, url: update_line_item_quantity_path, class: "quantity_form"  do |f| %>
-        <%= f.select :quantity, ((1..10).map {|i| [i,i] }), {}, {selected: line_item.quantity, class: "quantity_dropdown"} %>
-        <%= f.hidden_field :line_item_id, value: line_item.id %></br>
-      <% end %>
+
+<div>
+  <% @line_items.each do |line_item| %>
+    <%= "#{line_item.item.description}: #{line_item.quantity}" %>
+    <%= form_with model: line_item, method: :put, url: update_line_item_quantity_path, class: "quantity_form"  do |f| %>
+      <%= f.select :quantity, ((1..10).map {|i| [i,i] }), {}, {selected: line_item.quantity, class: "quantity_dropdown"} %>
+      <%= f.hidden_field :line_item_id, value: line_item.id %></br>
     <% end %>
-  </div>
-  <div>
+  <% end %>
+</div>
+<div>
+<%= if current_user.shopping_cart.line_items.count > 0 %>
   <%= form_with model: nil, url: clear_cart_path do |form| %>
     <div class="mb-3">
       <%= form.submit "Clear Cart", class: "btn btn-primary" %>
@@ -29,7 +30,7 @@
     </div>
   <% end %>
   </div>
-<% else %>
+<%= else %>
   <p>Your Is Empty!</p>
 <% end %>
 
