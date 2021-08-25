@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
-
   belongs_to :user
   has_many :line_items, as: :owner
+  has_many :addresses, as: :addressable
 
 end
