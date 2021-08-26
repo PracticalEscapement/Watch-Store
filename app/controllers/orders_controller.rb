@@ -8,7 +8,13 @@ class OrdersController < ApplicationController
 
   def add_shipping_info
     shopping_cart = current_user.shopping_cart
-    shopping_cart.addresses << Address.new(address_params)
+    shipping_address = shopping_cart.addresses.where(address_type: 'shipping').last
+    if shipping_address.present?
+      shipping_address.update!(address_params)
+    else
+      shopping_cart.addresses.build(address_params)
+      shopping_cart.save!
+    end
     redirect_to(order_summary_path)
   end
 

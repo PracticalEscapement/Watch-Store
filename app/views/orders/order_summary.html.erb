@@ -1,5 +1,10 @@
 <h1>Order Summary</h1>
 
+
+<div>
+  <%= @address.full_address %>
+</div>
+--------------------------
 <div>
   <% @line_items.each_with_index do |line_item, index| %>
     <%= "#{index + 1}.) #{line_item.item.description}(#{line_item.quantity}): $#{line_item.item.price}" %></br>
