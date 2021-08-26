@@ -23,12 +23,7 @@
   <% if current_user.shopping_cart.total_cost > 0 %>
     <%= "Total: #{number_to_currency(current_user.shopping_cart.total_cost)}" %>
   <% end %>
-    <%= form_with model: @order, url: orders_create_path do |form| %>
-    <%= form.hidden_field :owner_id %>
-    <div class="mb-3">
-      <%= form.button "Checkout", class: "btn btn-primary", data: { disable_with: "Please wait..." } %>
-    </div>
-  <% end %>
+    <%= link_to("Proceed To Checkout", shipping_info_path) %>
   </div>
 <% else %>
   <p>Your Is Empty!</p>
