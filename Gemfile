@@ -30,6 +30,9 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 # User Authentication
 gem 'devise', '~> 4.8'
 
+# Active Admin
+gem 'activeadmin', '~> 2.9'
+
 # Payments 
 gem 'stripe', '~> 5.34'
 

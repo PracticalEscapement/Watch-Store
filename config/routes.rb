@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   
   root 'pages#home'
-  devise_for :users
+  devise_for :users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   
   get '/store', to: 'items#index', as: :store
   get 'items/show/:id', to: 'items#show', as: :item
