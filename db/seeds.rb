@@ -21,4 +21,4 @@ users = User.create([{first_name: 'mike', last_name: 'moradi', email: 'mike@dev.
 users.each do |user|
     "#{user.first_name} ID: #{user.id}"
 end
-User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password', is_admin: true)

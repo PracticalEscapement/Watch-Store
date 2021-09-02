@@ -5,7 +5,7 @@ ActiveAdmin.register Item do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :catagory, :condition, :price, :description, :image_url
+  permit_params :catagory, :condition, :price, :description, :image_url
   #
   # or
   #
@@ -26,6 +26,7 @@ ActiveAdmin.register Item do
     column 'Image' do |item|
       image_tag(item.image_url, size: '100')
     end
+    actions
 
   end
 
