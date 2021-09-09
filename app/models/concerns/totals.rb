@@ -2,6 +2,15 @@ module Totals
   
   extend ActiveSupport::Concern
 
+
+  def shipping_address
+    addresses.each do |address|
+      if address.address_type == 'shipping'
+        return address
+      end
+    end
+  end
+
   def empty?
     line_items.empty?
   end
@@ -17,4 +26,5 @@ module Totals
   def total_cost_in_cents
     line_items.sum { |line_item| line_item.item.price * line_item.quantity }
   end
+
 end

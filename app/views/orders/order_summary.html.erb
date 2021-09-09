@@ -7,11 +7,13 @@
 --------------------------
 <div>
   <% @line_items.each_with_index do |line_item, index| %>
-    <%= "#{index + 1}.) #{line_item.item.description}(#{line_item.quantity}): $#{line_item.item.price}" %></br>
+    <%= "#{index + 1}.) #{line_item.item.description}(#{line_item.quantity}): $#{line_item.item.price_in_dollars}" %></br>
   <% end %>
 </div>
-<br><%= "Total: $#{@shopping_cart.total_cost} + tax" %>
-
+<br><%= "Subtotal: $#{@shopping_cart.total_cost}" %>
+<br><%= "Tax: #{@tax.amount_to_collect}" %>
+<br><%= "Shipping: Free!" %>
+<br><%= "TOTAL: #{@shopping_cart.total_cost + @tax.amount_to_collect}" %>
 
 <%= form_with model: @order, method: :post do |form| %>
   <div class="mb-3">

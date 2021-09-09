@@ -22,8 +22,8 @@
   <div>
   <% if current_user.shopping_cart.total_cost > 0 %>
     <%= "Total: #{number_to_currency(current_user.shopping_cart.total_cost)}" %>
-  <% end %>
     <%= link_to("Proceed To Checkout", shipping_info_path) %>
+  <% end %>
   </div>
 <% else %>
   <p>Your Is Empty!</p>

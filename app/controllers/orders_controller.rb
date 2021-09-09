@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
     @address = current_user.shopping_cart.addresses.last
     @line_items = current_user.shopping_cart.line_items
     @shopping_cart = current_user.shopping_cart
+    @tax = CalculateTaxForCart.new(shopping_cart: @shopping_cart).call
     @order = Order.new
   end
 
