@@ -36,6 +36,9 @@ gem 'activeadmin', '~> 2.9'
 # Payments 
 gem 'stripe', '~> 5.34'
 
+# TaxJar
+gem 'taxjar-ruby', '~> 3.0', '>= 3.0.2'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
