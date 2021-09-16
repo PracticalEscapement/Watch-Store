@@ -2,15 +2,6 @@ module Totals
   
   extend ActiveSupport::Concern
 
-
-  def shipping_address
-    addresses.each do |address|
-      if address.address_type == 'shipping'
-        return address
-      end
-    end
-  end
-
   def empty?
     line_items.empty?
   end
@@ -19,12 +10,27 @@ module Totals
     line_items.sum(&:quantity)
   end
 
-  def total_cost
-    total_cost_in_cents / 100
+  def subtotal_in_cents
+    line_items.sum { |line_item| line_item.item.price * line_item.quantity }
   end
 
-  def total_cost_in_cents
-    line_items.sum { |line_item| line_item.item.price * line_item.quantity }
+  def subtotal
+    subtotal_in_cents / 100
+  end
+
+  def sales_tax
+    taxes = CalculateTaxForCart.new(taxable_object: self).call
+    taxes.amount_to_collect
+  end
+
+  def total_in_cents
+    tax_in_cents = sales_tax * 100.0
+    tax_in_cents_as_int = tax_in_cents.to_int
+    subtotal_in_cents + tax_in_cents_as_int
+  end
+
+  def total
+    total_in_cents / 100.0
   end
 
 end

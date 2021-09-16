@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_31_223254) do
+ActiveRecord::Schema.define(version: 2021_09_13_232736) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_08_31_223254) do
     t.integer "addressable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "address_types_not_equal", default: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
   end
 

@@ -10,4 +10,16 @@ module AddressValidation
     end
   end
 
+  def shipping_address
+    addresses.find do |address|
+      address.address_type == 'shipping'
+    end
+  end
+
+  def billing_address
+    addresses.find do |address|
+      address.address_type == 'billing'
+    end
+  end
+
 end
