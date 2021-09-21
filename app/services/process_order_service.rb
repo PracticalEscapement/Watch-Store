@@ -84,7 +84,7 @@ class ProcessOrderService
   def charge_customer
     Stripe::Charge.create({
       customer: stripe_customer.id,
-      amount: cart.total_cost_in_cents,
+      amount: @order.total_in_cents,
       currency: default_currency,
       description: order_contents,
     })

@@ -1,0 +1,10 @@
+<h1>Orders#billing_info</h1>
+
+<%= form_with model: @address, url: add_billing_info_path do |form| %>
+    <%= render partial: "address_form", locals: {form: form} %>
+    <div class="mb-3">
+        <%= form.submit "Continue", class: "btn btn-primary", data: { disable_with: "Please wait..." } %>
+    </div>
+  <% end %>
+
+<h1>Credit Card Info</h1>

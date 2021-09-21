@@ -8,21 +8,43 @@ class OrdersController < ApplicationController
 
   def add_shipping_info
     shopping_cart = current_user.shopping_cart
-    shipping_address = shopping_cart.addresses.where(address_type: 'shipping').last
+    shipping_address = shopping_cart.shipping_address
+
     if shipping_address.present?
-      shipping_address.update!(address_params)
+      shipping_address.update!(shipping_address_params)
     else
-      shopping_cart.addresses.build(address_params)
+      shopping_cart.addresses.build(shipping_address_params)
+      shopping_cart.save!
+    end
+    if shopping_cart.shipping_address.address_types_not_equal
+      redirect_to(billing_info_path)
+    else
+      redirect_to(order_summary_path)
+    end
+  end
+
+  def billing_info
+    @address = Address.new
+  end
+
+  def add_billing_info
+    shopping_cart = current_user.shopping_cart
+    billing_address = shopping_cart.billing_address
+    if billing_address.present?
+      billing_address.update!(billing_address_params)
+    else
+      shopping_cart.addresses.build(billing_address_params)
       shopping_cart.save!
     end
     redirect_to(order_summary_path)
   end
 
   def order_summary
-    @address = current_user.shopping_cart.addresses.last
+    @shipping_address = current_user.shopping_cart.shipping_address
+    @billing_address = current_user.shopping_cart.billing_address
     @line_items = current_user.shopping_cart.line_items
     @shopping_cart = current_user.shopping_cart
-    @tax = CalculateTaxForCart.new(shopping_cart: @shopping_cart).call
+    @tax = @shopping_cart.sales_tax
     @order = Order.new
   end
 
@@ -41,7 +63,15 @@ class OrdersController < ApplicationController
 
   def address_params
     params.require(:address).permit(
-      :first_name, :last_name, :street_address, :street_address_unit, :city, :state, :country, :zip_code, :phone_number
-    ).merge(address_type: 'shipping')
+      :first_name, :last_name, :street_address, :street_address_unit, :city, :state, :country, :zip_code, :phone_number, :address_types_not_equal
+    )
+  end
+
+  def shipping_address_params
+    address_params.merge(address_type: 'shipping')
+  end
+
+  def billing_address_params
+    address_params.merge(address_type: 'billing')
   end
 end

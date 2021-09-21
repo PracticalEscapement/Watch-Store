@@ -2,7 +2,8 @@
 
 
 <div>
-  <%= @address.full_address %>
+  <%= "SHIPPING: #{@shipping_address.full_address}" %></br>
+  <%= "BILLING: #{@billing_address.full_address}" %>
 </div>
 --------------------------
 <div>
@@ -10,10 +11,10 @@
     <%= "#{index + 1}.) #{line_item.item.description}(#{line_item.quantity}): $#{line_item.item.price_in_dollars}" %></br>
   <% end %>
 </div>
-<br><%= "Subtotal: $#{@shopping_cart.total_cost}" %>
-<br><%= "Tax: #{@tax.amount_to_collect}" %>
+<br><%= "Subtotal: #{number_to_currency(@shopping_cart.subtotal)}" %>
+<br><%= "Tax: #{number_to_currency(@tax)}" %>
 <br><%= "Shipping: Free!" %>
-<br><%= "TOTAL: #{@shopping_cart.total_cost + @tax.amount_to_collect}" %>
+<br><%= "TOTAL: #{number_to_currency(@shopping_cart.total)}" %>
 
 <%= form_with model: @order, method: :post do |form| %>
   <div class="mb-3">

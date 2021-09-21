@@ -21,8 +21,8 @@ ActiveAdmin.register Order do
     column :line_items do |order| 
       order.line_items.collect { |line_item| "#{line_item.item.description} x#{line_item.quantity}" }.join('</br>').html_safe
     end
-    column :total_cost do |order|
-      number_to_currency(order.total_cost)
+    column :subtotal do |order|
+      number_to_currency(order.subtotal)
     end
     column :created_at
   end
