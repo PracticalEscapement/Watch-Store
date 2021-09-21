@@ -25,14 +25,6 @@ class CalculateTaxForCart
 
   private
 
-  def user
-    @taxable_object.user
-  end
-
-  def order
-    user.order.last
-  end
-
   def shipping_address
     @taxable_object.shipping_address
   end
