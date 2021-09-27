@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
   end
 
   def add_shipping_info
-    shopping_cart = current_user.shopping_cart
     shipping_address = shopping_cart.shipping_address
 
     if shipping_address.present?
@@ -28,7 +27,6 @@ class OrdersController < ApplicationController
   end
 
   def add_billing_info
-    shopping_cart = current_user.shopping_cart
     billing_address = shopping_cart.billing_address
     if billing_address.present?
       billing_address.update!(billing_address_params)
@@ -40,17 +38,16 @@ class OrdersController < ApplicationController
   end
 
   def order_summary
-    @shipping_address = current_user.shopping_cart.shipping_address
-    @billing_address = current_user.shopping_cart.billing_address
-    @line_items = current_user.shopping_cart.line_items
-    @shopping_cart = current_user.shopping_cart
+    @shipping_address = shopping_cart.shipping_address
+    @billing_address = shopping_cart.billing_address
+    @line_items = shopping_cart.line_items
+    @shopping_cart = shopping_cart
     @tax = @shopping_cart.sales_tax
     @order = Order.new
   end
 
   def create
-    @shopping_cart = current_user.shopping_cart
-    @order = Order.create(user: current_user, line_items: @shopping_cart.line_items, addresses: @shopping_cart.addresses)
+    @order = Order.create(user: current_user, line_items: shopping_cart.line_items, addresses: shopping_cart.addresses)
     ProcessOrderService.new(order: @order).call
     redirect_to(order_confirmation_path)
   end
@@ -60,6 +57,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def shopping_cart
+    @_shopping_cart ||= current_user.shopping_cart
+  end
 
   def address_params
     params.require(:address).permit(

@@ -26,7 +26,7 @@ class CalculateTaxForCart
   private
 
   def shipping_address
-    @taxable_object.shipping_address
+    @_shipping_address ||= @taxable_object.shipping_address
   end
 
 end
