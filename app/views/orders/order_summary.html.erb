@@ -3,7 +3,9 @@
 
 <div>
   <%= "SHIPPING: #{@shipping_address.full_address}" %></br>
-  <%= "BILLING: #{@billing_address.full_address}" %>
+  <% if @billing_address.present? %>
+    <%= "BILLING: #{@billing_address.full_address}" %>
+  <% end %>
 </div>
 --------------------------
 <div>
