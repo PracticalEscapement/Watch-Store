@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_29_201732) do
-
-  create_table "accounts", force: :cascade do |t|
-    t.string "accountable_type", null: false
-    t.integer "accountable_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable"
-  end
+ActiveRecord::Schema.define(version: 2021_09_13_232736) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"

@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   has_many :orders
   has_one :cart
-  has_one :account, as: :accountable
 
   def name
     full_name = [first_name, last_name].join(' ')
