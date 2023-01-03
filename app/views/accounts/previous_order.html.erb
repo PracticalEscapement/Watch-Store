@@ -1,0 +1,151 @@
+<style>
+body{margin-top:20px;
+  background:#eee;
+  }
+  
+  .invoice {
+      padding: 30px;
+  }
+  
+  .invoice h2 {
+    margin-top: 0px;
+    line-height: 0.8em;
+  }
+  
+  .invoice .small {
+    font-weight: 300;
+  }
+  
+  .invoice hr {
+    margin-top: 10px;
+    border-color: #ddd;
+  }
+  
+  .invoice .table tr.line {
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .invoice .table td {
+    border: none;
+  }
+  
+  .invoice .identity {
+    margin-top: 10px;
+    font-size: 1.1em;
+    font-weight: 300;
+  }
+  
+  .invoice .identity strong {
+    font-weight: 600;
+  }
+  
+  
+  .grid {
+      position: relative;
+    width: 100%;
+    background: #fff;
+    color: #666666;
+    border-radius: 2px;
+    margin-bottom: 25px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<body>
+  <div class="container">
+  <div class="row">
+              <!-- BEGIN INVOICE -->
+            <div class="col-xs-12">
+              <div class="grid invoice">
+                <div class="grid-body">
+                  <div class="invoice-title">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <h1>Moradi Watchmaking</h1>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <h2>invoice<br>
+                        <span class="small"><%= "##{@order.id}" %></span></h2>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <address>
+                        <strong>Billed To:</strong><br>
+                        <% if @order.billing_address.present? %>
+                          <%= @order.billing_address.full_address %>
+                        <% else %>
+                          <%= @order.shipping_address.full_address %>
+                        <% end %>
+                      </address>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                      <address>
+                        <strong>Shipped To:</strong><br>
+                        <%= @order.shipping_address.full_address %><br>
+                      </address>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <address>
+                        <strong>Payment Method:</strong><br>
+                      </address>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                      <address>
+                        <strong>Order Date:</strong><br>
+                        <%= @order.created_at  %>
+                      </address>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h3>ORDER SUMMARY</h3>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr class="line">
+                            <td><strong>#</strong></td>
+                            <td class="text-center"><strong>Items Purchased</strong></td>
+                            <td class="text-center"><strong>Price</strong></td>
+                            <td class="text-right"><strong>Quantity</strong></td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>
+                              <strong>
+                                <%= "Line_item" %>
+                              </strong><br>A website template is a pre-designed webpage, or set of webpages, that anyone can modify with their own content and images to setup a website.
+                            </td>
+                            <td class="text-center">15</td>
+                            <td class="text-center">$75</td>
+                          </tr>
+                      
+                          <tr>
+                            <td colspan="3">
+                            <td class="text-right"><strong>SUBTOTAL</strong></td>
+                            <td class="text-right">$1,125.00</td>
+                          </tr>
+                          <tr>
+                            <td colspan="3">
+                            </td><td class="text-right"><strong>Total</strong></td>
+                            <td class="text-right"><strong>$2,400.00</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>									
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- END INVOICE -->
+          </div>
+  </div>
+</body>
