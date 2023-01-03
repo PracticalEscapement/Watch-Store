@@ -2,6 +2,10 @@ module Totals
   
   extend ActiveSupport::Concern
 
+  def order_description
+    "#{created_at}: #{total_quantity} Items Purchased"
+  end
+
   def empty?
     line_items.empty?
   end
@@ -19,8 +23,7 @@ module Totals
   end
 
   def sales_tax
-    taxes = CalculateTaxForCart.new(taxable_object: self).call
-    taxes.amount_to_collect
+    subtotal * 0.08625
   end
 
   def total_in_cents

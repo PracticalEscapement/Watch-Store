@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   root 'pages#home'
   devise_for :users
   ActiveAdmin.routes(self)
+
+  get '/account', to: 'accounts#account_home', as: :account
+  get '/account/order_history', to: 'accounts#order_history', as: :order_history
+  get 'account/previous_order/:id', to: 'accounts#previous_order', as: :previous_order
   
   get '/store', to: 'items#index', as: :store
   get 'items/show/:id', to: 'items#show', as: :item

@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
     @line_items = shopping_cart.line_items
     @shopping_cart = shopping_cart
     @tax = @shopping_cart.sales_tax
-    @order = Order.new
+    @order = Order.new(total_cost: shopping_cart.total_in_cents)
   end
 
   def create
@@ -75,4 +75,5 @@ class OrdersController < ApplicationController
   def billing_address_params
     address_params.merge(address_type: 'billing')
   end
+  
 end

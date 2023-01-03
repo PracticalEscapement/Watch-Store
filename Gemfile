@@ -34,7 +34,7 @@ gem 'devise', '~> 4.8'
 gem 'activeadmin', '~> 2.9'
 
 # Payments 
-gem 'stripe', '~> 5.34'
+gem 'stripe', '~> 8.0'
 
 # TaxJar
 gem 'taxjar-ruby', '~> 3.0', '>= 3.0.2'
@@ -70,3 +70,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "pay", "~> 6.1"
